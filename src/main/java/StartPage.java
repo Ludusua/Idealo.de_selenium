@@ -4,6 +4,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StartPage extends BasePage {
     public StartPage(WebDriver driver) {
@@ -14,11 +17,25 @@ public class StartPage extends BasePage {
     private WebElement loginTitle;
     @FindBy(xpath = "//*[@id='onetrust-accept-btn-handler']")
     WebElement cookies;
+    @FindBy(xpath = "//iframe[contains(@src, 'idealo.de')]")
+    public WebElement iframe;
+    @FindBy(xpath = "//*[@class='ac-login-form']")
+    private WebElement loginForm;
+    @FindBy(xpath = "//div[@aria-label]//div[@class='CategoryBarCarouselstyle__CategoryIconContainer-sc-6yp9ee-3 fOcKte']")
+    private List<WebElement> iconsList;
 
+    public boolean waitForLoadingLoginForm() {
+        getWait().forVisibility(loginForm);
+        return loginForm.isDisplayed();
+    }
     public void clickOnCookies() {
         getWait().forVisibility(cookies);
         cookies.click();
 
+    }
+    public void switchToFrame(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(iframe));
     }
 
     public void acceptCookies() {

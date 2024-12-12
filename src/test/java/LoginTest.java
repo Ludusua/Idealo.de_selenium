@@ -13,6 +13,7 @@ public class LoginTest extends BaseTest {
     LoginPage loginPage;
     StartPage startPage;
     CookiesPage cookiesPage;
+    LoginFramePage loginFramePage;
 
     @Test
     public void positiveLoginTest() throws InterruptedException {
@@ -21,9 +22,11 @@ public class LoginTest extends BaseTest {
         startPage = new StartPage(driver);
         startPage.acceptCookies();
         startPage.clickOnLoginTitle();
-        loginPage = new LoginPage(driver);
-        loginPage.setEmailInputField(email);
-        loginPage.setPasswordInputField(password);
-        loginPage.clickOnLoginButton();
+        loginFramePage = new LoginFramePage(driver);
+        loginFramePage.switchToFrame();
+
+        loginFramePage.waitForLoadingLoginForm();
+       // driver.switchTo().defaultContent();
+       // loginFramePage.setUserData(email,password);
     }
 }

@@ -1,4 +1,6 @@
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
 public class BasePage {
@@ -11,5 +13,10 @@ public class BasePage {
 
     public Wait getWait() {
         return new Wait(driver);
+    }
+
+    public void moveMouseToTheElement(WebElement element){
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
     }
 }

@@ -1,4 +1,5 @@
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,12 +29,14 @@ public class StartPage extends BasePage {
         getWait().forVisibility(loginForm);
         return loginForm.isDisplayed();
     }
+
     public void clickOnCookies() {
         getWait().forVisibility(cookies);
         cookies.click();
 
     }
-    public void switchToFrame(){
+
+    public void switchToFrame() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(iframe));
     }
@@ -49,6 +52,18 @@ public class StartPage extends BasePage {
     public void clickOnLoginTitle() {
         getWait().forVisibility(loginTitle);
         loginTitle.click();
+    }
+
+    public void moveToElementAndClick(String name) {
+        List<WebElement> elements = iconsList;
+        getWait().forAllVisibility(elements);
+        for (WebElement element : elements) {
+            if (element.getText().contains(name)) {
+                Actions actions = new Actions(driver);
+                actions.moveToElement(element).click().perform();
+                break;
+            }
+        }
     }
 
 }

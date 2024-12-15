@@ -5,7 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class BaseTest {
     ChromeDriver driver;
-    String BASE_URL = "https://account.idealo.de/login?mode=iframe&source=myidealo";
+    String BASE_URL = "https://www.idealo.de/";
 
     @BeforeEach
     public void setup() {

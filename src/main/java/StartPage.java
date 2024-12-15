@@ -14,8 +14,8 @@ public class StartPage extends BasePage {
         super(driver);
     }
 
-    @FindBy(xpath = "//*[@class='myidealo-button']")
-    private WebElement loginTitle;
+    @FindBy(xpath = "//*[@class='myidealo-button-wrapper']//*[text()='Anmelden']")
+    private WebElement anmeldenButton;
     @FindBy(xpath = "//*[@id='onetrust-accept-btn-handler']")
     WebElement cookies;
     @FindBy(xpath = "//iframe[contains(@src, 'idealo.de')]")
@@ -24,21 +24,16 @@ public class StartPage extends BasePage {
     @FindBy(xpath = "//*[@class='ac-login-form']")
     private WebElement loginForm;
     @FindBy(xpath = "//div[@aria-label]//div[@class='CategoryBarCarouselstyle__CategoryIconContainer-sc-6yp9ee-3 fOcKte']")
-    private List<WebElement> iconsList;
+    private List<WebElement> labelsList;
+    @FindBy(xpath = "//section[@aria-label='Kategorieleiste']")
+    private WebElement header;
 
-    public boolean waitForLoadingLoginForm() {
-        getWait().forVisibility(loginForm);
-        return loginForm.isDisplayed();
+    public void clickLoginButton() {
+        getWait().forClickable(anmeldenButton);
+        anmeldenButton.click();
     }
 
-    public void clickOnCookies() {
-        getWait().forVisibility(cookies);
-        cookies.click();
-
-    }
-
-
-    public void switchToFrame(){
+    public void switchToFrame() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(
                 By.cssSelector("iframe[src*='account.idealo.de']")
@@ -53,15 +48,10 @@ public class StartPage extends BasePage {
         acceptButton.click();
     }
 
-    public void clickOnLoginTitle() {
-        getWait().forVisibility(loginTitle);
-        loginTitle.click();
-    }
 
-    public void moveToElementAndClick(String name) {
-        List<WebElement> elements = iconsList;
-        getWait().forAllVisibility(elements);
-        for (WebElement element : elements) {
+    public void moveToElementAndClick(String name)  {
+        getWait().forAllVisibility(labelsList);
+        for (WebElement element : labelsList) {
             if (element.getText().contains(name)) {
                 Actions actions = new Actions(driver);
                 actions.moveToElement(element).click().perform();

@@ -32,6 +32,11 @@ public class UserCanChooseCategory extends BaseTest {
         String itemName="Animal Crossing: New Leaf (3DS)";
         startPage = new StartPage(driver);
         startPage.acceptCookies();
+        startPage.clickLoginButton();
+        loginPage = new LoginPage(driver);
+        loginPage.login(email, password);
+        Thread.sleep(1000);
+        startPage = new StartPage(driver);
         startPage.moveToElementAndClick(category);
         categoryPage = new CategoryPage(driver);
         assertTrue(categoryPage.getCategoryName(category));
@@ -48,12 +53,12 @@ public class UserCanChooseCategory extends BaseTest {
         itemsListPage.chooseOneItem(itemName);
         itemPage = new ItemPage(driver);
         itemPage.clickOnFavoriteButton();
-        itemPage.switchToFrame();
-        loginPage = new LoginPage(driver);
-        loginPage.waitForLoadingLoginPage();
-        loginPage.setEmailInputField(email);
-        loginPage.setPasswordInputField(password);
-        loginPage.clickOnLoginButton();
-        Thread.sleep(3000);
+//        itemPage.switchToFrame();
+//        loginPage = new LoginPage(driver);
+//        loginPage.waitForLoadingLoginPage();
+//        loginPage.setEmailInputField(email);
+//        loginPage.setPasswordInputField(password);
+//        loginPage.clickOnLoginButton();
+//        Thread.sleep(3000);
     }
 }

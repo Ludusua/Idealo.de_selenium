@@ -66,5 +66,12 @@ public class ItemsListPage extends BasePage {
         }
         return containsName;
     }
-
+    public void chooseOneItem(String nameOfElement) {
+        for (WebElement itemName : itemsNameList) {
+            if (itemName.getText().contains(nameOfElement)) {
+                itemName.click();
+                break;
+            }
+        }
+    }
 }

@@ -4,10 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UserCanChooseCategory extends BaseTest {
+    LoginPage loginPage;
     StartPage startPage;
     CategoryPage categoryPage;
     SubCategoryPage subCategoryPage;
     ItemsListPage itemsListPage;
+    ItemPage itemPage;
 
     @Test
     public void clickOnCategory() {
@@ -20,11 +22,14 @@ public class UserCanChooseCategory extends BaseTest {
     }
 
     @Test
-    public void chooseOneItemFromCategory() {
+    public void chooseOneItemFromCategoryAndAddToFavorite() throws InterruptedException {
+        String email = "Virthunter@gmail.com";
+        String password = "Ludusua12";
         String category = "Gaming & Spielen";
         String oneCategoryName = "Video- & Computerspiele";
         String subCategoryName = "Videospiele";
         String individualCategoryName = "Animal Crossing";
+        String itemName="Animal Crossing: New Leaf (3DS)";
         startPage = new StartPage(driver);
         startPage.acceptCookies();
         startPage.moveToElementAndClick(category);
@@ -40,5 +45,15 @@ public class UserCanChooseCategory extends BaseTest {
         itemsListPage.waitForAllVisibilityResultItemList();
         assertFalse(itemsListPage.namesAreNotEmpty());
         assertTrue(itemsListPage.namesContainsItemName(individualCategoryName));
+        itemsListPage.chooseOneItem(itemName);
+        itemPage = new ItemPage(driver);
+        itemPage.clickOnFavoriteButton();
+        itemPage.switchToFrame();
+        loginPage = new LoginPage(driver);
+        loginPage.waitForLoadingLoginPage();
+        loginPage.setEmailInputField(email);
+        loginPage.setPasswordInputField(password);
+        loginPage.clickOnLoginButton();
+        Thread.sleep(3000);
     }
 }

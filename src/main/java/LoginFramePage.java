@@ -1,10 +1,6 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -12,6 +8,7 @@ public class LoginFramePage extends BasePage {
     public LoginFramePage(WebDriver driver) {
         super(driver);
     }
+
     @FindBy(xpath = "//iframe[contains(@src, 'idealo.de')]")
     public WebElement iframe;
     @FindBy(xpath = "//input[@id='LoginEmail']")
@@ -22,14 +19,27 @@ public class LoginFramePage extends BasePage {
     private WebElement loginButton;
     @FindBy(xpath = "//*[@class='ac-login-form']")
     private WebElement loginForm;
+    @FindBy(xpath = "//*[@id=\"RegistrationBenefitsContainer\"]")
+    private WebElement loginTitle;
+    @FindBy(xpath = "//h1[normalize-space()='Anmelden']")
+    private WebElement loginContainerForm;
 
-    public boolean waitForLoadingLoginForm() {
-        getWait().forVisibility(loginForm);
-        return loginForm.isDisplayed();
+
+
+
+    //    public boolean waitForLoadingLoginForm() {
+//        getWait().forVisibility(loginForm);
+//        return loginForm.isDisplayed();
+//    }
+    public boolean waitForLoadingLoginTitle() {
+        getWait().forVisibility(loginTitle);
+        return loginTitle.isDisplayed();
+
     }
-    public void switchToFrame(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(iframe));
+
+    public boolean waitForLoadingLoginContainerForm() {
+        getWait().forVisibility(loginContainerForm);
+        return loginContainerForm.isDisplayed();
     }
 
     public void setUserData(String email, String password) {

@@ -1,12 +1,4 @@
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 
 public class LoginTest extends BaseTest {
@@ -19,14 +11,19 @@ public class LoginTest extends BaseTest {
     public void positiveLoginTest() throws InterruptedException {
         String email = "Virthunter@gmail.com";
         String password = "Ludusua12";
-        startPage = new StartPage(driver);
-        startPage.acceptCookies();
-        startPage.clickOnLoginTitle();
+        //startPage = new StartPage(driver);
+        //startPage.acceptCookies();
+       // startPage.clickOnLoginTitle();
+        // Thread.sleep(5000);
+        //startPage.switchToFrame();
         loginFramePage = new LoginFramePage(driver);
-        loginFramePage.switchToFrame();
+        loginFramePage.waitForLoadingLoginTitle();
+       //oginFramePage.waitForLoadingLoginContainerForm();
+        // driver.switchTo().defaultContent();
+        loginFramePage.setUserData(email,password);
+        driver.get("https://www.idealo.de/");
+        driver.switchTo().defaultContent();
+        Thread.sleep(5000);
 
-        loginFramePage.waitForLoadingLoginForm();
-       // driver.switchTo().defaultContent();
-       // loginFramePage.setUserData(email,password);
     }
 }

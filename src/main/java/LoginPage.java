@@ -1,5 +1,3 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +15,8 @@ public class LoginPage extends BasePage{
 
     @FindBy(xpath = "//*[@id='RegisterWithEmail']")
     private WebElement loginButton;
+    @FindBy(xpath = "//*[@class='i-button i-button--expanded']")
+    private WebElement registrationButton;
 
     public void waitForLoadingLoginPage(){
         getWait().forVisibility(emailInputField);
@@ -31,8 +31,8 @@ public class LoginPage extends BasePage{
         passwordInputField.sendKeys(password);
     }
     public void clickOnLoginButton(){
-        getWait().forVisibility(loginButton);
-        loginButton.click();
+        getWait().forVisibility(registrationButton);
+        registrationButton.click();
     }
 
 }

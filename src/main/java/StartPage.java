@@ -17,9 +17,9 @@ public class StartPage extends BasePage {
     @FindBy(xpath = "//*[@class='myidealo-button-wrapper']//*[text()='Anmelden']")
     private WebElement anmeldenButton;
     @FindBy(xpath = "//*[@id='onetrust-accept-btn-handler']")
-    WebElement cookies;
+    private WebElement cookies;
     @FindBy(xpath = "//iframe[contains(@src, 'idealo.de')]")
-    public WebElement iframe;
+    private WebElement iframe;
 
     @FindBy(xpath = "//*[@class='ac-login-form']")
     private WebElement loginForm;

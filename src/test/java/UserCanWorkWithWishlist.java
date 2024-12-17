@@ -1,15 +1,17 @@
 import org.junit.jupiter.api.Test;
 
 
+public class UserCanWorkWithWishlist extends BaseTest{
 
-public class LoginTest extends BaseTest {
     LoginPage loginPage;
     StartPage startPage;
     CategoryPage categoryPage;
-
+    SubCategoryPage subCategoryPage;
+    ItemsListPage itemsListPage;
+    ItemPage itemPage;
 
     @Test
-    public void positiveLoginTest() {
+    public void wishlistTest() {
         startPage = new StartPage(driver);
         startPage.acceptCookies();
         startPage.clickLoginButton();

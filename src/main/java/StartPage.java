@@ -15,12 +15,13 @@ public class StartPage extends BasePage {
     }
 
     @FindBy(xpath = "//*[@class='myidealo-button-wrapper']//*[text()='Anmelden']")
-    private WebElement anmeldenButton;
+    private WebElement loginButton;
     @FindBy(xpath = "//*[@id='onetrust-accept-btn-handler']")
     private WebElement cookies;
     @FindBy(xpath = "//iframe[contains(@src, 'idealo.de')]")
     private WebElement iframe;
-
+    @FindBy(xpath = "//span[contains(text(),'Merkzettel')]")
+    private WebElement wishlistButton;
     @FindBy(xpath = "//*[@class='ac-login-form']")
     private WebElement loginForm;
     @FindBy(xpath = "//div[@aria-label]//div[@class='CategoryBarCarouselstyle__CategoryIconContainer-sc-6yp9ee-3 fOcKte']")
@@ -29,8 +30,12 @@ public class StartPage extends BasePage {
     private WebElement header;
 
     public void clickLoginButton() {
-        getWait().forClickable(anmeldenButton);
-        anmeldenButton.click();
+        getWait().forClickable(loginButton);
+        loginButton.click();
+    }
+    public void clickWishlistButton() {
+        getWait().forVisibility(wishlistButton);
+        wishlistButton.click();
     }
 
     public void switchToFrame() {

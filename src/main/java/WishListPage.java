@@ -13,6 +13,8 @@ public class WishListPage extends BasePage {
     private List<WebElement> itemsList;
     @FindBy(xpath = "//*[@class='title']")
     private List<WebElement> itemNames;
+    @FindBy(xpath = "//h2[contains(text(),'Du hast noch keine Produkte auf dieser Liste')]")
+    private WebElement emptyWishlistTitle;
     @FindBy(xpath = "//button[contains(text(),'Produkt entfernen')]")
     private WebElement deleteFromFavoriteButton;
     @FindBy(xpath = "//h1[contains(text(),'Mein Merkzettel')]")
@@ -25,6 +27,10 @@ public class WishListPage extends BasePage {
                 break;
             }
         }
+    }
+    public boolean emptyWishlistIsDisplayed(){
+        getWait().forVisibility(emptyWishlistTitle);
+        return emptyWishlistTitle.isDisplayed();
     }
 
     public boolean itemAvailable(String itemName){

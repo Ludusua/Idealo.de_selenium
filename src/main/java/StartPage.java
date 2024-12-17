@@ -33,8 +33,13 @@ public class StartPage extends BasePage {
         getWait().forClickable(loginButton);
         loginButton.click();
     }
+    public boolean headerIsVisible() {
+        getWait().forVisibility(header);
+        return header.isDisplayed();
+    }
     public void clickWishlistButton() {
-        getWait().forVisibility(wishlistButton);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(wishlistButton));
         wishlistButton.click();
     }
 

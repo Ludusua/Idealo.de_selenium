@@ -13,7 +13,8 @@ public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver) {
         super(driver);
     }
-
+    @FindBy(xpath = "//span[contains(text(),'Merkzettel')]")
+    private WebElement wishlistButton;
     @FindBy(xpath = "//*[@id='RegistrationEmail']")
     private WebElement emailInputField;
     @FindBy(xpath = "//*[@class='ac-form-element--password']")
@@ -28,8 +29,11 @@ public class LoginPage extends BasePage {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.cssSelector("iframe[src*='register?mode=iframe']")));
+            wait.until(ExpectedConditions.visibilityOf(emailInputField));
             emailInputField.sendKeys(email);
+            wait.until(ExpectedConditions.visibilityOf(passwordInputField));
             passwordInputField.sendKeys(password);
+            wait.until(ExpectedConditions.elementToBeClickable(loginButton));
             loginButton.click();
             driver.switchTo().defaultContent();
         } catch (Exception e) {

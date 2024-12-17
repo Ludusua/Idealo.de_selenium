@@ -1,21 +1,23 @@
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class UserCanWorkWithWishlist extends BaseTest{
+
+public class UserCanWorkWithWishlist extends BaseTest {
 
     LoginPage loginPage;
     StartPage startPage;
-    CategoryPage categoryPage;
-    SubCategoryPage subCategoryPage;
-    ItemsListPage itemsListPage;
-    ItemPage itemPage;
-
+    WishListPage wishListPage;
     @Test
-    public void wishlistTest() {
+    public void wishlistISEmptyTest() {
         startPage = new StartPage(driver);
         startPage.acceptCookies();
         startPage.clickLoginButton();
         loginPage = new LoginPage(driver);
         loginPage.login(VALID_EMAIL, VALID_PASSWORD);
+        startPage = new StartPage(driver);
+        startPage.clickWishlistButton();
+        wishListPage = new WishListPage(driver);
+        assertTrue(wishListPage.emptyWishlistIsDisplayed());
     }
 }

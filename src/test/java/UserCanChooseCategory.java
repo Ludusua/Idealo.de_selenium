@@ -22,7 +22,7 @@ public class UserCanChooseCategory extends BaseTest {
     }
 
     @Test
-    public void chooseOneItemFromCategoryAndAddToFavorite() throws InterruptedException {
+    public void chooseOneItemFromCategoryAndAddToFavorite()  {
         String category = "Gaming & Spielen";
         String oneCategoryName = "Video- & Computerspiele";
         String subCategoryName = "Videospiele";
@@ -33,8 +33,8 @@ public class UserCanChooseCategory extends BaseTest {
         startPage.clickLoginButton();
         loginPage = new LoginPage(driver);
         loginPage.login(VALID_EMAIL, VALID_PASSWORD);
-        Thread.sleep(1000);
         startPage = new StartPage(driver);
+        startPage.waitForLoadingStartPage();
         startPage.moveToElementAndClick(category);
         categoryPage = new CategoryPage(driver);
         assertTrue(categoryPage.getCategoryName(category));

@@ -33,6 +33,12 @@ public class StartPage extends BasePage {
         getWait().forClickable(loginButton);
         loginButton.click();
     }
+    public void waitForLoadingStartPage() {
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(
+                webDriver -> ((JavascriptExecutor) webDriver)
+                        .executeScript("return document.readyState").equals("complete")
+        );
+    }
     public boolean headerIsVisible() {
         getWait().forVisibility(header);
         return header.isDisplayed();

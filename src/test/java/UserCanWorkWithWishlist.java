@@ -16,6 +16,7 @@ public class UserCanWorkWithWishlist extends BaseTest {
         loginPage = new LoginPage(driver);
         loginPage.login(VALID_EMAIL, VALID_PASSWORD);
         startPage = new StartPage(driver);
+        startPage.waitForLoadingStartPage();
         startPage.clickWishlistButton();
         wishListPage = new WishListPage(driver);
         assertTrue(wishListPage.emptyWishlistIsDisplayed());

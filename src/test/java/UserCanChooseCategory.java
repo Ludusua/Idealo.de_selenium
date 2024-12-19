@@ -22,19 +22,21 @@ public class UserCanChooseCategory extends BaseTest {
     }
 
     @Test
-    public void chooseOneItemFromCategoryAndAddToFavorite()  {
+    public void chooseOneItemFromCategoryAndAddToFavorite() throws InterruptedException {
         String category = "Gaming & Spielen";
         String oneCategoryName = "Video- & Computerspiele";
         String subCategoryName = "Videospiele";
         String individualCategoryName = "Animal Crossing";
-        String itemName="Animal Crossing: New Leaf (3DS)";
+        String itemName="Animal Crossing: New Leaf - Welcome amiibo (3DS)";
         startPage = new StartPage(driver);
         startPage.acceptCookies();
         startPage.clickLoginButton();
         loginPage = new LoginPage(driver);
         loginPage.login(VALID_EMAIL, VALID_PASSWORD);
         startPage = new StartPage(driver);
-        startPage.waitForLoadingStartPage();
+        //startPage.waitForLoadingStartPage();
+        Thread.sleep(1000);
+        assertTrue(startPage.headerIsVisible());
         startPage.moveToElementAndClick(category);
         categoryPage = new CategoryPage(driver);
         assertTrue(categoryPage.getCategoryName(category));
@@ -48,9 +50,10 @@ public class UserCanChooseCategory extends BaseTest {
         itemsListPage.waitForAllVisibilityResultItemList();
         assertFalse(itemsListPage.namesAreNotEmpty());
         assertTrue(itemsListPage.namesContainsItemName(individualCategoryName));
-        itemsListPage.chooseOneItem(itemName);
-        itemPage = new ItemPage(driver);
-        itemPage.clickOnFavoriteButton();
+        itemsListPage.chooseOneItemAddToFavorite(itemName);
+//        itemsListPage.chooseOneItem(itemName);
+//        itemPage = new ItemPage(driver);
+//        itemPage.clickOnFavoriteButton();
 //        itemPage.switchToFrame();
 //        loginPage = new LoginPage(driver);
 //        loginPage.waitForLoadingLoginPage();

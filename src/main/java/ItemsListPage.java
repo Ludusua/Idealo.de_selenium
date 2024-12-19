@@ -1,3 +1,4 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +18,8 @@ public class ItemsListPage extends BasePage {
     private WebElement resultList;
     @FindBy(xpath = "//*[@data-testid='resultItem']")
     private List<WebElement> resultItemList;
+    @FindBy(xpath = "//*[@class=\"wishlistHeart\"]")
+    private WebElement addFavoriteButton;
     @FindBy(xpath = "//*[@class='sr-productSummary__title_f5flP']")
     private List<WebElement> itemsNameList;
     @FindBy(xpath = "//button[@data-testid='grid-button']")
@@ -56,6 +59,7 @@ public class ItemsListPage extends BasePage {
         }
         return isEmpty;
     }
+
     public boolean namesContainsItemName(String nameOfElement) {
         boolean containsName = true;
         for (WebElement itemName : itemsNameList) {
@@ -66,10 +70,21 @@ public class ItemsListPage extends BasePage {
         }
         return containsName;
     }
+
     public void chooseOneItem(String nameOfElement) {
         for (WebElement itemName : itemsNameList) {
             if (itemName.getText().contains(nameOfElement)) {
                 itemName.click();
+                break;
+            }
+        }
+    }
+
+    public void chooseOneItemAddToFavorite(String nameOfElement) {
+        for (WebElement item : resultItemList) {
+            if (item.getText().contains(nameOfElement)) {
+                WebElement addToFavorite = item.findElement(By.xpath(".//*[@data-testid=\"wishlist-heart\"]"));//[data-testid='wishlist-heart']
+                addToFavorite.click();
                 break;
             }
         }

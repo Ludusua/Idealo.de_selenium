@@ -22,6 +22,8 @@ public class StartPage extends BasePage {
     private WebElement iframe;
     @FindBy(xpath = "//span[contains(text(),'Merkzettel')]")
     private WebElement wishlistButton;
+    @FindBy(xpath = "//*[@id=\"IFeedbackButtonWrapper\"]")
+    private WebElement feedbackButton;
     @FindBy(xpath = "//*[@class='ac-login-form']")
     private WebElement loginForm;
     @FindBy(xpath = "//div[@aria-label]//div[@class='CategoryBarCarouselstyle__CategoryIconContainer-sc-6yp9ee-3 fOcKte']")
@@ -33,16 +35,19 @@ public class StartPage extends BasePage {
         getWait().forClickable(loginButton);
         loginButton.click();
     }
+
     public void waitForLoadingStartPage() {
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(
-                webDriver -> ((JavascriptExecutor) webDriver)
-                        .executeScript("return document.readyState").equals("complete")
-        );
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.urlToBe("https://www.idealo.de/"));
+        wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+        wait.until(ExpectedConditions.visibilityOf(feedbackButton));
     }
+
     public boolean headerIsVisible() {
         getWait().forVisibility(header);
         return header.isDisplayed();
     }
+
     public void clickWishlistButton() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(wishlistButton));
@@ -65,8 +70,8 @@ public class StartPage extends BasePage {
     }
 
 
-    public void moveToElementAndClick(String name)  {
-        getWait().forAllVisibility(labelsList);
+    public void moveToElementAndClick(String name) {
+       getWait().forAllVisibility(labelsList);
         for (WebElement element : labelsList) {
             if (element.getText().contains(name)) {
                 Actions actions = new Actions(driver);

@@ -29,7 +29,10 @@ public class StartPage extends BasePage {
     @FindBy(xpath = "//div[@aria-label]//div[@class='CategoryBarCarouselstyle__CategoryIconContainer-sc-6yp9ee-3 fOcKte']")
     private List<WebElement> labelsList;
     @FindBy(xpath = "//section[@aria-label='Kategorieleiste']")
+
     private WebElement header;
+    @FindBy(xpath = "//*[@id='i-search-input']")
+    private WebElement searchInputField;
 
     public void clickLoginButton() {
         getWait().forClickable(loginButton);
@@ -41,6 +44,11 @@ public class StartPage extends BasePage {
         wait.until(ExpectedConditions.urlToBe("https://www.idealo.de/"));
         wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
         wait.until(ExpectedConditions.visibilityOf(feedbackButton));
+    }
+
+    public void searchItemWithName(String item) {
+        getWait().forVisibility(searchInputField);
+        searchInputField.sendKeys(item + Keys.ENTER);
     }
 
     public boolean headerIsVisible() {
@@ -71,7 +79,7 @@ public class StartPage extends BasePage {
 
 
     public void moveToElementAndClick(String name) {
-       getWait().forAllVisibility(labelsList);
+        getWait().forAllVisibility(labelsList);
         for (WebElement element : labelsList) {
             if (element.getText().contains(name)) {
                 Actions actions = new Actions(driver);

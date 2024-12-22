@@ -13,10 +13,15 @@ public class WishPriceSetupPage extends BasePage {
     private WebElement discount15;
     @FindBy(xpath = "//button[contains(text(),'spare 10 %')]")
     private WebElement discount10;
+    @FindBy(xpath = "//button[contains(text(),'Preiswecker stellen')]")
+    private WebElement priceAlertSetupButton;
 
     @FindBy(xpath = "//*[@class=\"sc-eqUAAy cHxsyP\"]")
     private List<WebElement> discountButtons;
-
+    public void clickPriceAlertSetupButton() {
+        getWait().forClickable(priceAlertSetupButton);
+        priceAlertSetupButton.click();
+    }
     public void discount15Click(String discountValue) {
         getWait().forAllVisibility(discountButtons);
         for (WebElement button : discountButtons) {

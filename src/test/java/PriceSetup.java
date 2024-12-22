@@ -6,11 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class PriceSetup extends BaseTest {
     LoginPage loginPage;
     StartPage startPage;
-    CategoryPage categoryPage;
-    SubCategoryPage subCategoryPage;
     ItemsListPage itemsListPage;
     ItemPage itemPage;
     WishPriceSetupPage wishPriceSetupPage;
+    SuccessWishPriceSetupPage successWishPriceSetupPage;
 
     @Test
     public void setAlertPriseDiscount15() throws InterruptedException {
@@ -35,14 +34,10 @@ public class PriceSetup extends BaseTest {
         itemPage.clickPriceAlertButton();
         wishPriceSetupPage = new WishPriceSetupPage(driver);
         wishPriceSetupPage.discount15Click(discountValue);
-//        itemPage = new ItemPage(driver);
-//        itemPage.clickOnFavoriteButton();
-//        itemPage.switchToFrame();
-//        loginPage = new LoginPage(driver);
-//        loginPage.waitForLoadingLoginPage();
-//        loginPage.setEmailInputField(email);
-//        loginPage.setPasswordInputField(password);
-//        loginPage.clickOnLoginButton();
-        Thread.sleep(3000);
+        wishPriceSetupPage.clickPriceAlertSetupButton();
+        successWishPriceSetupPage = new SuccessWishPriceSetupPage(driver);
+        assertTrue(successWishPriceSetupPage.successAlertIsVisible());
+        assertTrue(successWishPriceSetupPage.itemIsEquals(itemName));
+        successWishPriceSetupPage.clickAgreeButton();
     }
 }

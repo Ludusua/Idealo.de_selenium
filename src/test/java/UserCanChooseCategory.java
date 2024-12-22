@@ -9,7 +9,6 @@ public class UserCanChooseCategory extends BaseTest {
     CategoryPage categoryPage;
     SubCategoryPage subCategoryPage;
     ItemsListPage itemsListPage;
-    ItemPage itemPage;
 
     @Test
     public void clickOnCategory() {

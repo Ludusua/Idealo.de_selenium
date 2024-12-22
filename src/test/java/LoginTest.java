@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 public class LoginTest extends BaseTest {
     LoginPage loginPage;
     StartPage startPage;
-    CategoryPage categoryPage;
+
 
 
     @Test

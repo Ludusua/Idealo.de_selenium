@@ -20,13 +20,14 @@ public class StartPage extends BasePage {
     private WebElement cookies;
     @FindBy(xpath = "//iframe[contains(@src, 'idealo.de')]")
     private WebElement iframe;
+
     @FindBy(xpath = "//span[contains(text(),'Merkzettel')]")
     private WebElement wishlistButton;
-    @FindBy(xpath = "//*[@id=\"IFeedbackButtonWrapper\"]")
+    @FindBy(xpath = "//*[@id='IFeedbackButton']")
     private WebElement feedbackButton;
     @FindBy(xpath = "//*[@class='ac-login-form']")
     private WebElement loginForm;
-    @FindBy(xpath = "//div[@aria-label]//div[@class='CategoryBarCarouselstyle__CategoryIconContainer-sc-6yp9ee-3 fOcKte']")
+    @FindBy(css = "div[class$='category-bar-categories-no-swipe']")
     private List<WebElement> labelsList;
     @FindBy(xpath = "//section[@aria-label='Kategorieleiste']")
 
@@ -40,11 +41,14 @@ public class StartPage extends BasePage {
     }
 
     public void waitForLoadingStartPage() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.urlToBe("https://www.idealo.de/"));
-        wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
-        wait.until(ExpectedConditions.visibilityOf(feedbackButton));
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//        wait.until(ExpectedConditions.urlToBe("https://www.idealo.de/"));
+//        wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+//        wait.until(ExpectedConditions.visibilityOf(feedbackButton));
+        //getWait().forAllVisibility(labelsList);
+        assertTrue(feedbackButton.isDisplayed());
     }
+
 
     public void searchItemWithName(String item) {
         getWait().forVisibility(searchInputField);
@@ -60,6 +64,10 @@ public class StartPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(wishlistButton));
         wishlistButton.click();
+    }
+    public boolean feedbackButtonIsVisible() {
+        getWait().forClickable(feedbackButton);
+        return feedbackButton.isDisplayed();
     }
 
     public void switchToFrame() {

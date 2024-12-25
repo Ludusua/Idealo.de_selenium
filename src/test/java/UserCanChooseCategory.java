@@ -26,15 +26,17 @@ public class UserCanChooseCategory extends BaseTest {
         String oneCategoryName = "Video- & Computerspiele";
         String subCategoryName = "Videospiele";
         String individualCategoryName = "Animal Crossing";
-        String itemName="Animal Crossing: New Leaf - Welcome amiibo (3DS)";
+        String itemName = "Animal Crossing: New Leaf - Welcome amiibo (3DS)";
         startPage = new StartPage(driver);
         startPage.acceptCookies();
         startPage.clickLoginButton();
         loginPage = new LoginPage(driver);
         loginPage.login(VALID_EMAIL, VALID_PASSWORD);
         startPage = new StartPage(driver);
-        //startPage.waitForLoadingStartPage();
+
+        //startPage.feedbackButtonIsVisible();
         Thread.sleep(1000);
+        startPage.waitForLoadingStartPage();
         assertTrue(startPage.headerIsVisible());
         startPage.moveToElementAndClick(category);
         categoryPage = new CategoryPage(driver);

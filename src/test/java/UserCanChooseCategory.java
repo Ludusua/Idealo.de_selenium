@@ -33,7 +33,6 @@ public class UserCanChooseCategory extends BaseTest {
         loginPage = new LoginPage(driver);
         loginPage.login(VALID_EMAIL, VALID_PASSWORD);
         startPage = new StartPage(driver);
-
         //startPage.feedbackButtonIsVisible();
         Thread.sleep(1000);
         startPage.waitForLoadingStartPage();
@@ -52,15 +51,5 @@ public class UserCanChooseCategory extends BaseTest {
         assertFalse(itemsListPage.namesAreNotEmpty());
         assertTrue(itemsListPage.namesContainsItemName(individualCategoryName));
         itemsListPage.chooseOneItemAddToFavorite(itemName);
-//        itemsListPage.chooseOneItem(itemName);
-//        itemPage = new ItemPage(driver);
-//        itemPage.clickOnFavoriteButton();
-//        itemPage.switchToFrame();
-//        loginPage = new LoginPage(driver);
-//        loginPage.waitForLoadingLoginPage();
-//        loginPage.setEmailInputField(email);
-//        loginPage.setPasswordInputField(password);
-//        loginPage.clickOnLoginButton();
-//        Thread.sleep(3000);
     }
 }

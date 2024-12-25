@@ -13,6 +13,7 @@ public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver) {
         super(driver);
     }
+
     @FindBy(xpath = "//span[contains(text(),'Merkzettel')]")
     private WebElement wishlistButton;
     @FindBy(xpath = "//*[@id='RegistrationEmail']")
@@ -36,7 +37,7 @@ public class LoginPage extends BasePage {
             wait.until(ExpectedConditions.elementToBeClickable(loginButton));
             loginButton.click();
             driver.switchTo().defaultContent();
-           // wait.until(ExpectedConditions.urlContains("https://www.idealo.de/"));
+            // wait.until(ExpectedConditions.urlContains("https://www.idealo.de/"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -47,7 +48,6 @@ public class LoginPage extends BasePage {
         getWait().forVisibility(emailInputField);
         assertTrue(emailInputField.isDisplayed());
     }
-
 
 
 }

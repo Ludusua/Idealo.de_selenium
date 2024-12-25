@@ -33,22 +33,18 @@ public class ItemsListPage extends BasePage {
         getWait().forVisibility(resultList);
         assertTrue(resultList.isDisplayed());
     }
-
     public void chooseGridView() {
         getWait().forVisibility(gridViewButton);
         gridViewButton.click();
     }
-
     public void chooseListView() {
         getWait().forVisibility(listViewButton);
         listViewButton.click();
     }
-
     public void waitForAllVisibilityResultItemList() {
         getWait().forAllVisibility(resultItemList);
         System.out.println(resultItemList.size());
     }
-
     public boolean namesAreNotEmpty() {
         boolean isEmpty = false;
         for (WebElement itemName : itemsNameList) {
@@ -59,7 +55,6 @@ public class ItemsListPage extends BasePage {
         }
         return isEmpty;
     }
-
     public boolean namesContainsItemName(String nameOfElement) {
         boolean containsName = true;
         for (WebElement itemName : itemsNameList) {
@@ -70,7 +65,6 @@ public class ItemsListPage extends BasePage {
         }
         return containsName;
     }
-
     public void chooseOneItem(String nameOfElement) {
         for (WebElement itemName : itemsNameList) {
             if (itemName.getText().contains(nameOfElement)) {
@@ -79,7 +73,6 @@ public class ItemsListPage extends BasePage {
             }
         }
     }
-
     public void chooseOneItemAddToFavorite(String nameOfElement) {
         for (WebElement item : resultItemList) {
             if (item.getText().contains(nameOfElement)) {

@@ -17,6 +17,7 @@ public class ItemPage extends BasePage {
         getWait().forVisibility(addToFavoriteButton);
         addToFavoriteButton.click();
     }
+
     public void clickPriceAlertButton() {
         getWait().forVisibility(priceAlertButton);
         priceAlertButton.click();

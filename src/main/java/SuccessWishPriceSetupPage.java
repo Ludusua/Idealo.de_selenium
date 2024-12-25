@@ -13,6 +13,7 @@ public class SuccessWishPriceSetupPage extends BasePage {
     private WebElement successAddItemName;
     @FindBy(xpath = "//button[contains(text(),'Okay, verstanden')]")
     private WebElement agreeButton;
+
     public boolean successAlertIsVisible() {
         getWait().forVisibility(successAlertSetupTitle);
         return successAlertSetupTitle.isDisplayed();

@@ -28,16 +28,17 @@ public class WishListPage extends BasePage {
             }
         }
     }
-    public boolean emptyWishlistIsDisplayed(){
+
+    public boolean emptyWishlistIsDisplayed() {
         getWait().forVisibility(emptyWishlistTitle);
         return emptyWishlistTitle.isDisplayed();
     }
 
-    public boolean itemAvailable(String itemName){
+    public boolean itemAvailable(String itemName) {
         boolean isAvailable = false;
         for (WebElement name : itemNames) {
             if (name.getText().equals(itemName)) {
-                isAvailable =true;
+                isAvailable = true;
                 break;
             }
         }

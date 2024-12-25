@@ -65,6 +65,7 @@ public class StartPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(wishlistButton));
         wishlistButton.click();
     }
+
     public boolean feedbackButtonIsVisible() {
         getWait().forClickable(feedbackButton);
         return feedbackButton.isDisplayed();

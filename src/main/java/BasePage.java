@@ -1,7 +1,10 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+
 public class BasePage {
     WebDriver driver;
 
@@ -17,5 +20,10 @@ public class BasePage {
         actions.moveToElement(element).perform();
     }
 
+    public void selectWith(WebElement element, String text){
+        WebElement dropdown = driver.findElement((By) element);
+        Select select = new Select(dropdown);
+        select.selectByVisibleText(text);
+    }
 
 }

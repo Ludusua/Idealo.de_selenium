@@ -2,7 +2,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -40,31 +43,49 @@ public class ItemsListPage extends BasePage {
     public void chooseReifenbreite(String text) {
         selectWith(dropdownReifenbreite, text);
     }
+
     public void chooseReifenquerschnitt(String text) {
         selectWith(dropdownReifenquerschnitt, text);
     }
+
     public void chooseFelgendurchmesser(String text) {
         selectWith(dropdownFelgendurchmesser, text);
     }
+
     public void chooseTragfähigkeitsindex(String text) {
         selectWith(dropdownTragfähigkeitsindex, text);
     }
+
     public void chooseGeschwindigkeitsindex(String text) {
         selectWith(dropdownGeschwindigkeitsindex, text);
     }
-    public void setWheelData(String reifenbreite,String reifenquerschnitt,String felgendurchmesser,String tragfähigkeitsindex,String geschwindigkeitsindex) {
+
+    public void setWheelData(String reifenbreite, String reifenquerschnitt, String felgendurchmesser, String tragfähigkeitsindex, String geschwindigkeitsindex) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         getWait().forVisibility(dropdownReifenbreite);
         dropdownReifenbreite.click();
         selectWith(dropdownReifenbreite, reifenbreite);
+        wait.until(ExpectedConditions.textToBePresentInElement(dropdownReifenbreite, reifenbreite));
+        Thread.sleep(1000);
         getWait().forVisibility(dropdownReifenquerschnitt);
         dropdownReifenquerschnitt.click();
         selectWith(dropdownReifenquerschnitt, reifenquerschnitt);
+        wait.until(ExpectedConditions.textToBePresentInElement(dropdownReifenquerschnitt, reifenquerschnitt));
+        Thread.sleep(1000);
         getWait().forVisibility(dropdownFelgendurchmesser);
+        dropdownFelgendurchmesser.click();
         selectWith(dropdownFelgendurchmesser, felgendurchmesser);
+        wait.until(ExpectedConditions.textToBePresentInElement(dropdownFelgendurchmesser, felgendurchmesser));
+        Thread.sleep(1000);
         getWait().forVisibility(dropdownTragfähigkeitsindex);
+        dropdownTragfähigkeitsindex.click();
         selectWith(dropdownTragfähigkeitsindex, tragfähigkeitsindex);
+        wait.until(ExpectedConditions.textToBePresentInElement(dropdownTragfähigkeitsindex, tragfähigkeitsindex));
+        Thread.sleep(1000);
         getWait().forVisibility(dropdownGeschwindigkeitsindex);
+        dropdownGeschwindigkeitsindex.click();
         selectWith(dropdownGeschwindigkeitsindex, geschwindigkeitsindex);
+        wait.until(ExpectedConditions.textToBePresentInElement(dropdownGeschwindigkeitsindex, geschwindigkeitsindex));
     }
 
     public void waitForLoadingItemsListPage() {

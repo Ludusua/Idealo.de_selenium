@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class UserCanWorkWithSelect extends BaseTest{
+public class UserCanWorkWithSelect extends BaseTest {
     LoginPage loginPage;
     StartPage startPage;
     CategoryPage categoryPage;
@@ -25,7 +25,7 @@ public class UserCanWorkWithSelect extends BaseTest{
         startPage = new StartPage(driver);
         //startPage.feedbackButtonIsVisible();
         Thread.sleep(1000);
-       // startPage.waitForLoadingStartPage();
+        // startPage.waitForLoadingStartPage();
         assertTrue(startPage.headerIsVisible());
         startPage.moveToElementAndClick(category);
         categoryPage = new CategoryPage(driver);
@@ -37,11 +37,10 @@ public class UserCanWorkWithSelect extends BaseTest{
         subCategoryPage.moveToElementAndClickOneCategoryItem(subCategoryName, individualCategoryName);
         itemsListPage = new ItemsListPage(driver);
         itemsListPage.waitForLoadingItemsListPage();
-        itemsListPage.setWheelData("165","40","17 Zoll","Bitte wählen","V (bis 240 km/h)");
+        itemsListPage.setWheelData("165", "40", "17 Zoll", "Bitte wählen", "V (bis 240 km/h)");
         Thread.sleep(10000);
 
-//        itemsListPage.chooseListView();
-//        itemsListPage.waitForAllVisibilityResultItemList();
+        //  itemsListPage.waitForAllVisibilityResultItemList();
 //        assertFalse(itemsListPage.namesAreNotEmpty());
 //        assertTrue(itemsListPage.namesContainsItemName(individualCategoryName));
 //        itemsListPage.chooseOneItemAddToFavorite(itemName);

@@ -21,7 +21,7 @@ public class BasePage {
     }
 
     public void selectWith(WebElement element, String text){
-        WebElement dropdown = driver.findElement((By) element);
+        WebElement dropdown = element;
         Select select = new Select(dropdown);
         select.selectByVisibleText(text);
     }

@@ -26,6 +26,46 @@ public class ItemsListPage extends BasePage {
     private WebElement gridViewButton;
     @FindBy(xpath = "//button[@data-testid='list-button']")
     private WebElement listViewButton;
+    @FindBy(xpath = "//*[@id='Reifenbreite (mm)']")
+    private WebElement dropdownReifenbreite;
+    @FindBy(xpath = "//*[@id='Reifenquerschnitt (%)']")
+    private WebElement dropdownReifenquerschnitt;
+    @FindBy(xpath = "//*[@id='Felgendurchmesser']")
+    private WebElement dropdownFelgendurchmesser;
+    @FindBy(xpath = "//*[@id='Tragfähigkeitsindex']")
+    private WebElement dropdownTragfähigkeitsindex;
+    @FindBy(xpath = "//*[@id='Geschwindigkeitsindex']")
+    private WebElement dropdownGeschwindigkeitsindex;
+
+    public void chooseReifenbreite(String text) {
+        selectWith(dropdownReifenbreite, text);
+    }
+    public void chooseReifenquerschnitt(String text) {
+        selectWith(dropdownReifenquerschnitt, text);
+    }
+    public void chooseFelgendurchmesser(String text) {
+        selectWith(dropdownFelgendurchmesser, text);
+    }
+    public void chooseTragfähigkeitsindex(String text) {
+        selectWith(dropdownTragfähigkeitsindex, text);
+    }
+    public void chooseGeschwindigkeitsindex(String text) {
+        selectWith(dropdownGeschwindigkeitsindex, text);
+    }
+    public void setWheelData(String reifenbreite,String reifenquerschnitt,String felgendurchmesser,String tragfähigkeitsindex,String geschwindigkeitsindex) {
+        getWait().forVisibility(dropdownReifenbreite);
+        dropdownReifenbreite.click();
+        selectWith(dropdownReifenbreite, reifenbreite);
+        getWait().forVisibility(dropdownReifenquerschnitt);
+        dropdownReifenquerschnitt.click();
+        selectWith(dropdownReifenquerschnitt, reifenquerschnitt);
+        getWait().forVisibility(dropdownFelgendurchmesser);
+        selectWith(dropdownFelgendurchmesser, felgendurchmesser);
+        getWait().forVisibility(dropdownTragfähigkeitsindex);
+        selectWith(dropdownTragfähigkeitsindex, tragfähigkeitsindex);
+        getWait().forVisibility(dropdownGeschwindigkeitsindex);
+        selectWith(dropdownGeschwindigkeitsindex, geschwindigkeitsindex);
+    }
 
     public void waitForLoadingItemsListPage() {
         getWait().forVisibility(categoryTitle);
@@ -33,18 +73,22 @@ public class ItemsListPage extends BasePage {
         getWait().forVisibility(resultList);
         assertTrue(resultList.isDisplayed());
     }
+
     public void chooseGridView() {
         getWait().forVisibility(gridViewButton);
         gridViewButton.click();
     }
+
     public void chooseListView() {
         getWait().forVisibility(listViewButton);
         listViewButton.click();
     }
+
     public void waitForAllVisibilityResultItemList() {
         getWait().forAllVisibility(resultItemList);
         System.out.println(resultItemList.size());
     }
+
     public boolean namesAreNotEmpty() {
         boolean isEmpty = false;
         for (WebElement itemName : itemsNameList) {
@@ -55,6 +99,7 @@ public class ItemsListPage extends BasePage {
         }
         return isEmpty;
     }
+
     public boolean namesContainsItemName(String nameOfElement) {
         boolean containsName = true;
         for (WebElement itemName : itemsNameList) {
@@ -65,6 +110,7 @@ public class ItemsListPage extends BasePage {
         }
         return containsName;
     }
+
     public void chooseOneItem(String nameOfElement) {
         for (WebElement itemName : itemsNameList) {
             if (itemName.getText().contains(nameOfElement)) {
@@ -73,6 +119,7 @@ public class ItemsListPage extends BasePage {
             }
         }
     }
+
     public void chooseOneItemAddToFavorite(String nameOfElement) {
         for (WebElement item : resultItemList) {
             if (item.getText().contains(nameOfElement)) {

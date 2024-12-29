@@ -37,6 +37,9 @@ public class UserCanWorkWithSelect extends BaseTest{
         subCategoryPage.moveToElementAndClickOneCategoryItem(subCategoryName, individualCategoryName);
         itemsListPage = new ItemsListPage(driver);
         itemsListPage.waitForLoadingItemsListPage();
+        itemsListPage.setWheelData("165","40","17 Zoll","Bitte wählen","V (bis 240 km/h)");
+        Thread.sleep(10000);
+
 //        itemsListPage.chooseListView();
 //        itemsListPage.waitForAllVisibilityResultItemList();
 //        assertFalse(itemsListPage.namesAreNotEmpty());

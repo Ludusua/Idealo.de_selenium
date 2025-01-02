@@ -1,8 +1,10 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -21,7 +23,7 @@ public class ItemsListPage extends BasePage {
     private WebElement resultList;
     @FindBy(xpath = "//*[@data-testid='resultItem']")
     private List<WebElement> resultItemList;
-    @FindBy(xpath = "//*[@class=\"wishlistHeart\"]")
+    @FindBy(xpath = "//*[@class='wishlistHeart']")
     private WebElement addFavoriteButton;
     @FindBy(xpath = "//*[@class='sr-productSummary__title_f5flP']")
     private List<WebElement> itemsNameList;
@@ -40,52 +42,58 @@ public class ItemsListPage extends BasePage {
     @FindBy(xpath = "//*[@id='Geschwindigkeitsindex']")
     private WebElement dropdownGeschwindigkeitsindex;
 
-    public void chooseReifenbreite(String text) {
-        selectWith(dropdownReifenbreite, text);
-    }
 
-    public void chooseReifenquerschnitt(String text) {
-        selectWith(dropdownReifenquerschnitt, text);
-    }
-
-    public void chooseFelgendurchmesser(String text) {
-        selectWith(dropdownFelgendurchmesser, text);
-    }
-
-    public void chooseTragfähigkeitsindex(String text) {
-        selectWith(dropdownTragfähigkeitsindex, text);
-    }
-
-    public void chooseGeschwindigkeitsindex(String text) {
-        selectWith(dropdownGeschwindigkeitsindex, text);
-    }
-
-    public void setWheelData(String reifenbreite, String reifenquerschnitt, String felgendurchmesser, String tragfähigkeitsindex, String geschwindigkeitsindex) throws InterruptedException {
+    public void setDropdownReifenbreite(String reifenbreite) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        Select select = new Select(dropdownReifenbreite);
         getWait().forVisibility(dropdownReifenbreite);
         dropdownReifenbreite.click();
         selectWith(dropdownReifenbreite, reifenbreite);
-        wait.until(ExpectedConditions.textToBePresentInElement(dropdownReifenbreite, reifenbreite));
-        Thread.sleep(1000);
+        wait.until(driver -> select.getFirstSelectedOption().getText().equals(reifenbreite));
+    }
+
+    public void setDropdownReifenquerschnitt(String reifenquerschnitt) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        Select select = new Select(dropdownReifenquerschnitt);
         getWait().forVisibility(dropdownReifenquerschnitt);
         dropdownReifenquerschnitt.click();
         selectWith(dropdownReifenquerschnitt, reifenquerschnitt);
-        wait.until(ExpectedConditions.textToBePresentInElement(dropdownReifenquerschnitt, reifenquerschnitt));
-        Thread.sleep(1000);
+        wait.until(driver -> select.getFirstSelectedOption().getText().equals(reifenquerschnitt));
+    }
+
+    public void setDropdownFelgendurchmesser(String felgendurchmesser) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        Select select = new Select(dropdownFelgendurchmesser);
         getWait().forVisibility(dropdownFelgendurchmesser);
         dropdownFelgendurchmesser.click();
         selectWith(dropdownFelgendurchmesser, felgendurchmesser);
-        wait.until(ExpectedConditions.textToBePresentInElement(dropdownFelgendurchmesser, felgendurchmesser));
-        Thread.sleep(1000);
+        wait.until(driver -> select.getFirstSelectedOption().getText().equals(felgendurchmesser));
+    }
+
+    public void setDropdownTragfähigkeitsindex(String tragfähigkeitsindex) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        Select select = new Select(dropdownTragfähigkeitsindex);
         getWait().forVisibility(dropdownTragfähigkeitsindex);
         dropdownTragfähigkeitsindex.click();
         selectWith(dropdownTragfähigkeitsindex, tragfähigkeitsindex);
-        wait.until(ExpectedConditions.textToBePresentInElement(dropdownTragfähigkeitsindex, tragfähigkeitsindex));
-        Thread.sleep(1000);
+        wait.until(driver -> select.getFirstSelectedOption().getText().equals(tragfähigkeitsindex));
+    }
+
+    public void setDropdownGeschwindigkeitsindex(String geschwindigkeitsindex) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        Select select = new Select(dropdownGeschwindigkeitsindex);
         getWait().forVisibility(dropdownGeschwindigkeitsindex);
         dropdownGeschwindigkeitsindex.click();
         selectWith(dropdownGeschwindigkeitsindex, geschwindigkeitsindex);
-        wait.until(ExpectedConditions.textToBePresentInElement(dropdownGeschwindigkeitsindex, geschwindigkeitsindex));
+        wait.until(driver -> select.getFirstSelectedOption().getText().equals(geschwindigkeitsindex));
+    }
+
+    public void setWheelData1(String reifenbreite, String reifenquerschnitt, String felgendurchmesser, String tragfähigkeitsindex, String geschwindigkeitsindex) {
+        setDropdownReifenbreite(reifenbreite);
+        setDropdownReifenquerschnitt(reifenquerschnitt);
+        setDropdownFelgendurchmesser(felgendurchmesser);
+        setDropdownTragfähigkeitsindex(tragfähigkeitsindex);
+        setDropdownGeschwindigkeitsindex(geschwindigkeitsindex);
     }
 
     public void waitForLoadingItemsListPage() {
@@ -144,7 +152,7 @@ public class ItemsListPage extends BasePage {
     public void chooseOneItemAddToFavorite(String nameOfElement) {
         for (WebElement item : resultItemList) {
             if (item.getText().contains(nameOfElement)) {
-                WebElement addToFavorite = item.findElement(By.xpath(".//*[@data-testid=\"wishlist-heart\"]"));//[data-testid='wishlist-heart']
+                WebElement addToFavorite = item.findElement(By.xpath(".//*[@data-testid='wishlist-heart']"));
                 addToFavorite.click();
                 break;
             }

@@ -11,12 +11,11 @@ public class UserCanWorkWithSelect extends BaseTest {
     ItemsListPage itemsListPage;
 
     @Test
-    public void chooseOneItemFromCategoryAndAddToFavorite() throws InterruptedException {
+    public void chooseOneItemFromDropdownMenus() throws InterruptedException {
         String category = "Auto & Motorrad";
         String oneCategoryName = "Räder & Reifen";
         String subCategoryName = "Sommerreifen";
         String individualCategoryName = "Goodyear";
-        String itemName = "Animal Crossing: New Leaf - Welcome amiibo (3DS)";
         startPage = new StartPage(driver);
         startPage.acceptCookies();
         startPage.clickLoginButton();
@@ -37,8 +36,8 @@ public class UserCanWorkWithSelect extends BaseTest {
         subCategoryPage.moveToElementAndClickOneCategoryItem(subCategoryName, individualCategoryName);
         itemsListPage = new ItemsListPage(driver);
         itemsListPage.waitForLoadingItemsListPage();
-        itemsListPage.setWheelData("165", "40", "17 Zoll", "Bitte wählen", "V (bis 240 km/h)");
-        Thread.sleep(10000);
+        itemsListPage.setWheelData1("165", "40", "17 Zoll", "Bitte wählen", "V (bis 240 km/h)");
+        Thread.sleep(1000);
 
         //  itemsListPage.waitForAllVisibilityResultItemList();
 //        assertFalse(itemsListPage.namesAreNotEmpty());

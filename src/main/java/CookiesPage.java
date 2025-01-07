@@ -10,9 +10,8 @@ public class CookiesPage extends BasePage{
     public CookiesPage(WebDriver driver) {
         super(driver);
     }
-   // @FindBy(xpath = "//*[src='https://web.cmp.usercentrics.eu/cdcs/v/1.0.0/index.html']")
-   // public WebElement iframe;
-    @FindBy(xpath = "//*[id=\"uc-cmp-description\"]")
+
+    @FindBy(xpath = "//*[id='uc-cmp-description']")
     public WebElement dialogWindow;
     @FindBy(xpath = "//*[@aria-label='Annehmen']")
     WebElement cookiesAccept;

@@ -37,7 +37,6 @@ public class LoginPage extends BasePage {
             wait.until(ExpectedConditions.elementToBeClickable(loginButton));
             loginButton.click();
             driver.switchTo().defaultContent();
-            // wait.until(ExpectedConditions.urlContains("https://www.idealo.de/"));
 
         } catch (Exception e) {
             e.printStackTrace();
